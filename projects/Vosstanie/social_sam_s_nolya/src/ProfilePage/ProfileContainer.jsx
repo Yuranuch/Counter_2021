@@ -1,21 +1,16 @@
 import React from 'react';
 import style from "./ProfilePage.module.css"
 import ProfilePage from "./ProfilePage";
-import * as axios from "axios";
 import {withRouter} from "react-router-dom";
+import {getProfile} from "../api/api";
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-        //this.props.toggleIsFetching(true)
-        debugger
         let userId = this.props.match.params.userId
         if(!userId){userId=2}
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+ userId)
+        getProfile(userId)
             .then(response => {
-
                 this.props.setProfile(response.data)
-
-                //this.props.toggleIsFetching(false)
             })
     }
 
